@@ -2,65 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login — DriveCare</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="auth-page">
-
+<body class="auth-body">
     <div class="auth-card">
-        <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="font-family: 'Plus Jakarta Sans'; color: var(--dark); font-size: 2rem;">Welcome Back</h1>
-            <p style="color: var(--text-muted);">Login to your DriveCare account</p>
+        <h2>DriveCare Login</h2>
+        <div class="input-group">
+            <input type="text" id="loginPhone" placeholder="Phone Number or Admin ID">
         </div>
-
-        <div id="loginError" style="display:none; background: #fee2e2; border: 1px solid #fecaca; color: #dc2626; padding: 12px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9rem;">
-            <i class="fa-solid fa-circle-exclamation"></i> <span id="loginErrMsg"></span>
+        <div class="input-group">
+            <input type="password" id="loginPass" placeholder="Password">
         </div>
-
-        <div class="form-group">
-            <label style="display: block; font-weight: 600; margin-bottom: 8px;">Phone or Admin ID</label>
-            <input type="text" class="form-control" id="loginPhone" placeholder="Enter phone or admindrivecare">
-        </div>
-
-        <div class="form-group">
-            <div style="display: flex; justify-content: space-between;">
-                <label style="font-weight: 600; margin-bottom: 8px;">Password</label>
-                <a href="#" onclick="handleForgot()" style="color: var(--primary); font-size: 0.8rem; text-decoration: none; font-weight: 700;">Forgot?</a>
-            </div>
-            <div style="position: relative;">
-                <input type="password" class="form-control" id="loginPass" placeholder="••••••••" onkeypress="if(event.key==='Enter')login()">
-                <button onclick="togglePass('loginPass', this)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted);">
-                    <i class="fa-regular fa-eye"></i>
-                </button>
-            </div>
-        </div>
-
-        <button class="btn btn-primary" id="loginBtn" onclick="login()" style="width: 100%; padding: 16px; margin-top: 10px; font-size: 1rem;">
-            Sign In
-        </button>
-
-        <p style="text-align: center; margin-top: 25px; color: var(--text-muted); font-size: 0.9rem;">
-            New to DriveCare? <a href="signup.html" style="color: var(--primary); font-weight: 700; text-decoration: none;">Create Account</a>
-        </p>
+        <button class="btn-blue" onclick="login()">Login</button>
+        <p style="margin-top:15px;">New? <a href="signup.html" style="color:var(--primary);">Create Account</a></p>
     </div>
-
     <script src="script.js"></script>
-    <script>
-        // Local UI Helpers
-        function togglePass(id, btn) {
-            const input = document.getElementById(id);
-            const icon = btn.querySelector('i');
-            input.type = input.type === 'password' ? 'text' : 'password';
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        }
-
-        function handleForgot() {
-            const id = prompt("Enter your Phone or Admin ID to reset password:");
-            if (id) alert("A reset link has been sent to your registered contact method.");
-        }
-    </script>
 </body>
 </html>
