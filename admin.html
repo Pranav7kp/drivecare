@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — DriveCare</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+    .stat-card { background: white; padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .stat-card h3 { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .stat-card .value { font-size: 2rem; font-weight: 800; color: var(--dark); font-family: 'Plus Jakarta Sans'; }
+    
+    .admin-table-container { background: white; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: var(--bg-subtle); padding: 15px; text-align: left; font-size: 0.85rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    td { padding: 15px; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+    tr:hover { background: #fdfdfd; }
+    
+    .status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    .status-active { background: var(--primary-soft); color: var(--primary); }
+</style>
+</head>
+<body>
+
+<div class="dashboard-layout">
+    <div class="sidebar">
+        <div style="padding: 0 10px 30px 10px;">
+            <h2 style="font-family: 'Plus Jakarta Sans'; color: var(--dark); display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> DriveCare
+            </h2>
+            <span style="font-size: 0.7rem; color: var(--primary); font-weight: 800; letter-spacing: 1px;">ADMIN CONSOLE</span>
+        </div>
+        
+        <nav>
+            <button class="nav-item active" onclick="showTab('overview')"><i class="fa-solid fa-house"></i> Overview</button>
+            <button class="nav-item" onclick="showTab('bookings')"><i class="fa-solid fa-list-check"></i> Manage Bookings</button>
+            <button class="nav-item" onclick="showTab('users')"><i class="fa-solid fa-users"></i> Customers</button>
+            <button class="nav-item" onclick="showTab('settings')"><i class="fa-solid fa-sliders"></i> System Settings</button>
+            <hr style="border: none; border-top: 1px solid var(--border); margin: 20px 0;">
+            <button class="nav-item" onclick="logout()" style="color: #ef4444;"><i class="fa-solid fa-power-off"></i> Sign Out</button>
+        </nav>
+    </div>
+
+    <main class="main-content">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h1 id="pageTitle" style="font-family: 'Plus Jakarta Sans';">Dashboard Overview</h1>
+            <div id="adminIdentity" style="font-weight: 600; color: var(--text-muted);">Admin: admindrivecare</div>
+        </header>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <h3>Total Users</h3>
+                <div class="value" id="count-users">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Bookings</h3>
+                <div class="value" id="count-bookings">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Revenue</h3>
+                <div class="value">₹0</div>
+            </div>
+        </div>
+
+        <div class="admin-table-container">
+            <div style="padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                <h3 style="font-family: 'Plus Jakarta Sans';">Recent Customer Activity</h3>
+                <button class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;" onclick="location.reload()">Refresh Data</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Phone Number</th>
+                        <th>Join Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adminUserTable">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // Security Guard: Only allow the specific Admin ID
+    document.addEventListener('DOMContentLoaded', () => {
+        const session = JSON.parse(sessionStorage.getItem('dc_session'));
+        if (!session || session.phone !== 'admin' && session.phone !== 'admindrivecare') {
+            alert("Unauthorized Access! Please log in as Admin.");
+            window.location.href = 'login.html';
+            return;
+        }
+
+        // Render Stats
+        const users = JSON.parse(localStorage.getItem('dc_users') || '[]');
+        document.getElementById('count-users').innerText = users.length;
+        
+        const table = document.getElementById('adminUserTable');
+        table.innerHTML = users.map(u => `
+            <tr>
+                <td><strong>${u.name}</strong></td>
+                <td>${u.phone}</td>
+                <td>${new Date().toLocaleDateString()}</td>
+                <td><span class="status-badge status-active">Verified</span></td>
+                <td><button onclick="alert('Viewing details for ${u.name}')" style="background:none; border:none; color:var(--primary); cursor:pointer; font-weight:700;">View</button></td>
+            </tr>
+        `).join('') || '<tr><td colspan="5" style="text-align:center; padding:20px;">No users found.</td></tr>';
+    });
+
+    function logout() {
+        sessionStorage.removeItem('dc_session');
+        window.location.href = 'index.html';
+    }
+
+    function showTab(tab) {
+        document.getElementById('pageTitle').innerText = tab.charAt(0).toUpperCase() + tab.slice(1);
+    }
+</script>
+</body>
+</html>
