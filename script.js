@@ -1,145 +1,109 @@
-/**
- * DriveCare — Core Application Logic
- * Full Version: Includes Admin admindrivecare & Password Recovery
- */
-
-// ===== 1. CONFIGURATION & DATABASE =====
+// ===== 1. ADMIN & SYSTEM CONFIG =====
 const ADMIN_CREDS = { 
     phone: 'admindrivecare', 
     password: 'drivecare@123' 
 };
 
+// ===== 2. DATA UTILITIES (Local Storage Helpers) =====
 const DC = {
-    // ---- USER STORAGE ----
-    getUsers() {
-        return JSON.parse(localStorage.getItem('dc_users') || '[]');
-    },
-    saveUser(user) {
-        const users = this.getUsers();
-        // Encrypt password using btoa for consistency with existing logic
-        const newUser = { 
-            ...user, 
-            id: Date.now(), 
-            password: btoa(user.password), 
-            createdAt: new Date().toISOString() 
-        };
-        users.push(newUser);
-        localStorage.setItem('dc_users', JSON.stringify(users));
-    },
-    findUser(phone, password) {
-        return this.getUsers().find(u => u.phone === phone && u.password === btoa(password));
-    },
-
-    // ---- SESSION MANAGEMENT ----
-    setSession(user) {
-        sessionStorage.setItem('dc_session', JSON.stringify({ ...user, loginAt: Date.now() }));
-    },
-    getSession() {
-        const s = sessionStorage.getItem('dc_session');
-        return s ? JSON.parse(s) : null;
-    },
-    clearSession() {
+    // Get all registered users
+    getUsers: () => JSON.parse(localStorage.getItem('dc_users') || '[]'),
+    
+    // Get all service bookings
+    getBookings: () => JSON.parse(localStorage.getItem('dc_bookings') || '[]'),
+    
+    // Handle the current login session
+    setSession: (user) => sessionStorage.setItem('dc_session', JSON.stringify(user)),
+    getSession: () => JSON.parse(sessionStorage.getItem('dc_session')),
+    
+    // Clear session and go home
+    logout: () => {
         sessionStorage.removeItem('dc_session');
-    },
-
-    // ---- UI NOTIFICATIONS ----
-    toast(msg, type = 'success') {
-        const toast = document.createElement('div');
-        toast.style.cssText = `
-            position: fixed; bottom: 30px; right: 30px; padding: 16px 28px; 
-            background: ${type === 'success' ? '#10b981' : '#ef4444'}; color: white;
-            border-radius: 12px; font-weight: 600; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
-            z-index: 10000; transition: 0.3s; font-family: sans-serif;
-        `;
-        toast.innerText = msg;
-        document.body.appendChild(toast);
-        setTimeout(() => { 
-            toast.style.opacity = '0'; 
-            setTimeout(() => toast.remove(), 300); 
-        }, 3000);
+        window.location.href = 'index.html';
     }
 };
 
-// ===== 2. LOGIN & AUTHENTICATION =====
+// ===== 3. LOGIN FUNCTION (For Login.html) =====
 function login() {
     const phoneInput = document.getElementById('loginPhone');
     const passInput = document.getElementById('loginPass');
-    const btn = document.getElementById('loginBtn');
-    const errBox = document.getElementById('loginError');
-    const errMsg = document.getElementById('loginErrMsg');
 
     if (!phoneInput || !passInput) return;
 
     const phone = phoneInput.value.trim();
     const pass = passInput.value;
 
-    // Reset UI
-    if (errBox) errBox.style.display = 'none';
-    
-    if (!phone || !pass) {
-        DC.toast("Please fill in all fields", "error");
+    // A. Check for Admin Login
+    if (phone === ADMIN_CREDS.phone && pass === ADMIN_CREDS.password) {
+        DC.setSession({ name: 'System Admin', role: 'admin', phone: 'admin' });
+        window.location.href = 'admin.html';
         return;
     }
 
-    btn.disabled = true;
-    btn.innerText = "Authenticating...";
-
-    setTimeout(() => {
-        // A. ADMIN CHECK
-        if (phone === ADMIN_CREDS.phone && pass === ADMIN_CREDS.password) {
-            DC.setSession({ name: 'System Admin', role: 'admin', phone: 'admindrivecare' });
-            DC.toast("Admin access granted");
-            window.location.href = 'admin.html';
-            return;
-        }
-
-        // B. USER CHECK
-        const user = DC.findUser(phone, pass);
-        if (user) {
-            DC.setSession({ ...user, role: 'user' });
-            DC.toast(`Welcome back, ${user.name.split(' ')[0]}!`);
-            window.location.href = 'dashboard.html';
-        } else {
-            btn.disabled = false;
-            btn.innerText = "Sign In";
-            if (errBox) {
-                errBox.style.display = 'flex';
-                errMsg.innerText = "Invalid ID or Password";
-            }
-        }
-    }, 600);
-}
-
-// ===== 3. FORGOT PASSWORD LOGIC =====
-function handleForgot() {
-    const id = prompt("Enter your Phone Number or Admin ID:");
-    if (!id) return;
-
-    // Admin Recovery
-    if (id === ADMIN_CREDS.phone) {
-        alert("For security, Admin password resets must be done via the configuration file.");
-        return;
-    }
-
-    // User Recovery
+    // B. Check for Registered User Login
     const users = DC.getUsers();
-    const userIndex = users.findIndex(u => u.phone === id);
+    // Use btoa to match the "encryption" used during signup
+    const user = users.find(u => u.phone === phone && u.password === btoa(pass));
 
-    if (userIndex !== -1) {
-        const newPass = prompt("Enter new password (min 6 chars):");
-        if (newPass && newPass.length >= 6) {
-            users[userIndex].password = btoa(newPass);
-            localStorage.setItem('dc_users', JSON.stringify(users));
-            DC.toast("Password updated successfully!");
-        } else {
-            DC.toast("Invalid password", "error");
-        }
+    if (user) {
+        DC.setSession({ ...user, role: 'user' });
+        window.location.href = 'dashboard.html';
     } else {
-        DC.toast("Account not found", "error");
+        alert("Invalid credentials. Please try again!");
     }
 }
 
-// ===== 4. SIGNUP LOGIC =====
+// ===== 4. BOOKING LOGIC (For Index & Dashboard) =====
+function openBooking() {
+    const session = DC.getSession();
+    
+    // If NOT logged in, redirect to login page
+    if (!session) {
+        alert("Authentication required. Please log in to book a service.");
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // If logged in, look for the booking modal on the current page
+    const modal = document.getElementById('bookingModal');
+    if (modal) {
+        modal.style.display = 'flex'; // Shows the popup
+    } else {
+        // If they click 'Book' on index.html but are logged in, send to Dashboard
+        window.location.href = 'dashboard.html';
+    }
+}
+
+function submitBooking() {
+    const service = document.getElementById('serviceType').value;
+    const date = document.getElementById('bookDate').value;
+    const session = DC.getSession();
+
+    if (!date) {
+        alert("Please select a valid date for your service.");
+        return;
+    }
+
+    const bookings = DC.getBookings();
+    
+    // Create new booking object
+    const newBooking = {
+        id: Date.now(),
+        userPhone: session.phone,
+        userName: session.name,
+        service: service,
+        date: date,
+        status: 'Pending'
+    };
+
+    bookings.push(newBooking);
+    localStorage.setItem('dc_bookings', JSON.stringify(bookings));
+    
+    alert("Success! Your booking has been recorded.");
+    location.reload(); // Refresh to show the new booking in the list
+}
+
+// ===== 5. SIGNUP LOGIC (For Signup.html) =====
 function signup() {
     const fname = document.getElementById('fname').value.trim();
     const lname = document.getElementById('lname').value.trim();
@@ -147,44 +111,23 @@ function signup() {
     const pass = document.getElementById('pass').value;
 
     if (!fname || !phone || !pass) {
-        DC.toast("Missing required fields", "error");
+        alert("Please fill in all required fields.");
         return;
     }
 
-    if (DC.getUsers().find(u => u.phone === phone)) {
-        DC.toast("Phone already registered", "error");
+    const users = DC.getUsers();
+    if (users.find(u => u.phone === phone)) {
+        alert("This phone number is already registered.");
         return;
     }
 
-    DC.saveUser({
+    users.push({
         name: `${fname} ${lname}`,
         phone: phone,
-        password: pass
+        password: btoa(pass) // Simple encoding for storage
     });
 
-    DC.toast("Account created! Redirecting...");
-    setTimeout(() => window.location.href = 'login.html', 1200);
+    localStorage.setItem('dc_users', JSON.stringify(users));
+    alert("Account created successfully! You can now log in.");
+    window.location.href = 'login.html';
 }
-
-// ===== 5. GLOBAL HELPERS =====
-function logout() {
-    DC.clearSession();
-    window.location.href = 'index.html';
-}
-
-function openBooking() {
-    const session = DC.getSession();
-    if (!session) {
-        DC.toast("Login required to book", "error");
-        setTimeout(() => window.location.href = 'login.html', 1000);
-    } else {
-        const overlay = document.getElementById('bookingOverlay');
-        if (overlay) overlay.classList.add('active');
-    }
-}
-
-// Auto-run on page load
-document.addEventListener('DOMContentLoaded', () => {
-    // This handles any initial UI state needed
-    console.log("DriveCare Engine Ready.");
-});

@@ -2,31 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Dashboard — DriveCare</title>
+    <title>Dashboard — DriveCare</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-<div class="dashboard-layout">
-    <div class="sidebar">
-        <div class="logo" style="margin-bottom: 40px;">
-            <span>DriveCare</span>
+<body style="background: #f4f7fe;">
+
+    <div style="display: flex; min-height: 100vh;">
+        <div style="width: 250px; background: #fff; padding: 20px; border-right: 1px solid #e0e0e0;">
+            <h2 style="color: #4e73df;">DriveCare</h2>
+            <hr>
+            <button onclick="location.reload()" style="width:100%; padding:10px; margin:10px 0; border:none; background:none; text-align:left; cursor:pointer;">Dashboard</button>
+            <button onclick="DC.logout()" style="width:100%; padding:10px; border:none; background:none; text-align:left; color:red; cursor:pointer;">Logout</button>
         </div>
-        <nav>
-            <button class="nav-item active">📊 My Bookings</button>
-            <button class="nav-item">📍 Track Service</button>
-            <button class="nav-item">🕐 History</button>
-            <button class="nav-item">👤 Profile</button>
-            <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border);">
-            <button class="nav-item" style="color: #ef4444;">🚪 Logout</button>
-        </nav>
+
+        <div style="flex: 1; padding: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h1>Welcome, <span id="dashName">User</span></h1>
+                <button onclick="openBooking()" class="btn btn-primary" style="padding: 10px 25px;">+ Book Service</button>
+            </div>
+
+            <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h3>Your Bookings</h3>
+                <div id="userBookingList">No bookings found. Click the button above to start!</div>
+            </div>
+        </div>
     </div>
 
-    <main class="main-content">
-        <h2 style="font-family:'Plus Jakarta Sans'; margin-bottom: 20px;">Welcome back!</h2>
-        <div style="background: white; padding: 40px; border-radius: var(--radius); border: 1px solid var(--border);">
-            <p style="color: var(--text-muted);">Your recent bookings and car health will appear here.</p>
+    <div id="bookingModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
+        <div style="background:white; padding:30px; border-radius:15px; width:400px; position:relative;">
+            <h2 style="margin-top:0;">New Booking</h2>
+            <label>Select Service</label>
+            <select id="serviceType" style="width:100%; padding:10px; margin:10px 0;">
+                <option>Full Car Wash</option>
+                <option>Deep Interior Cleaning</option>
+                <option>Oil Change & Filter</option>
+            </select>
+            <label>Select Date</label>
+            <input type="date" id="bookDate" style="width:100%; padding:10px; margin:10px 0;">
+            <button onclick="submitBooking()" class="btn btn-primary" style="width:100%; margin-top:10px;">Confirm Booking</button>
+            <button onclick="document.getElementById('bookingModal').style.display='none'" style="width:100%; background:none; border:none; margin-top:10px; cursor:pointer; color:gray;">Cancel</button>
         </div>
-    </main>
-</div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = DC.getSession();
+            if(!user) window.location.href = 'login.html';
+            document.getElementById('dashName').innerText = user.name;
+
+            // Show user's specific bookings
+            const allBookings = DC.getBookings();
+            const myBookings = allBookings.filter(b => b.userPhone === user.phone);
+            if(myBookings.length > 0) {
+                document.getElementById('userBookingList').innerHTML = myBookings.map(b => `
+                    <div style="padding:15px; border-bottom:1px solid #eee; display:flex; justify-content:space-between;">
+                        <span><strong>${b.service}</strong></span>
+                        <span>${b.date}</span>
+                        <span style="color:orange;">${b.status}</span>
+                    </div>
+                `).join('');
+            }
+        });
+    </script>
 </body>
 </html>
