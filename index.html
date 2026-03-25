@@ -3,109 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DriveCare | Car Services</title>
+    <title>DriveCare</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <nav class="navbar">
-        <div class="logo">DriveCare</div>
-        <a href="login.html" class="nav-login-link">Login</a>
-    </nav>
-
-    <header class="hero-banner">
-        <h1>Car Care, Simplified.</h1>
-        <p>Premium detailing and repairs at your doorstep.</p>
-    </header>
-
-    <div class="main-content">
+    <nav class="navbar"><div class="logo">DriveCare</div><a href="login.html" style="color:var(--primary); font-weight:700; text-decoration:none;">Login</a></nav>
+    <header class="hero-banner"><h1>Car Care</h1><p>Premium Services</p></header>
+    <div class="content-container">
         <div class="services-grid">
-            
-            <div class="service-card">
-                <div class="image-container"><img src="wash.png" alt="Wash"></div>
-                <div class="card-info">
-                    <h3>Premium Wash</h3>
-                    <p>Exterior foam & tire shine</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="interior.png" alt="Interior"></div>
-                <div class="card-info">
-                    <h3>Interior Clean</h3>
-                    <p>Vacuum & dashboard polish</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="detail.png" alt="Detail"></div>
-                <div class="card-info">
-                    <h3>Full Detailing</h3>
-                    <p>Complete car restoration</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="oil.png" alt="Oil"></div>
-                <div class="card-info">
-                    <h3>Oil Change</h3>
-                    <p>Synthetic oil & filter</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="battery.png" alt="Battery"></div>
-                <div class="card-info">
-                    <h3>Battery Check</h3>
-                    <p>Voltage test & replacement</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="paint.png" alt="Paint"></div>
-                <div class="card-info">
-                    <h3>Paint Protect</h3>
-                    <p>9H Ceramic coating</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="repai.png" alt="Repair"></div>
-                <div class="card-info">
-                    <h3>General Repair</h3>
-                    <p>Engine & electrical fixes</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="spare.png" alt="Spare"></div>
-                <div class="card-info">
-                    <h3>Genuine Spares</h3>
-                    <p>OEM parts guaranteed</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
-            <div class="service-card">
-                <div class="image-container"><img src="tow.png" alt="Tow"></div>
-                <div class="card-info">
-                    <h3>24/7 Towing</h3>
-                    <p>Emergency breakdown help</p>
-                </div>
-                <button class="btn-book-now" onclick="openBooking()">Book Now</button>
-            </div>
-
+            <div class="ui-card"><div class="icon-circle"><img src="wash.png"></div><h3>Wash</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="interior.png"></div><h3>Interior</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="detail.png"></div><h3>Detailing</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="oil.png"></div><h3>Oil</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="battery.png"></div><h3>Battery</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="paint.png"></div><h3>Paint</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="repai.png"></div><h3>Repair</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="spare.png"></div><h3>Spares</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
+            <div class="ui-card"><div class="icon-circle"><img src="tow.png"></div><h3>Towing</h3><button class="btn-drive" onclick="openBooking()">Book</button></div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

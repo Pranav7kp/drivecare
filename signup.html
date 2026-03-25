@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | DriveCare</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | DriveCare</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar"><div class="logo">DriveCare</div></nav>
-    <div class="auth-wrapper">
-        <div class="auth-card">
-            <h2 style="color:var(--primary);">Join DriveCare</h2>
-            <input type="text" id="fname" class="input-field" placeholder="Full Name">
-            <input type="number" id="phone" class="input-field" placeholder="Phone Number">
-            <input type="password" id="pass" class="input-field" placeholder="Create Password">
-            <button class="btn-book" onclick="signup()">Create Account</button>
-            <p style="margin-top:20px;">Already a member? <a href="login.html" style="color:var(--primary); font-weight:600;">Login</a></p>
-        </div>
-    </div>
+    <div class="auth-wrapper"><div class="auth-box ui-card">
+        <h2 style="color:var(--primary);">Sign Up</h2>
+        <input type="text" id="fname" class="ui-input" placeholder="Full Name">
+        <input type="number" id="phone" class="ui-input" placeholder="Phone Number">
+        <input type="password" id="pass" class="ui-input" placeholder="Password">
+        <button class="btn-drive" onclick="signup()">Create Account</button>
+        <p style="margin-top:15px; font-size:14px;">Member? <a href="login.html" style="color:var(--primary); text-decoration:none; font-weight:700;">Login</a></p>
+    </div></div>
     <script src="script.js"></script>
 </body>
 </html>

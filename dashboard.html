@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dashboard | DriveCare</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | DriveCare</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">DriveCare</div>
-        <button onclick="logout()" style="background:none; border:1px solid #ff4d4d; color:#ff4d4d; padding:6px 12px; border-radius:8px; cursor:pointer; font-weight:600;">Logout</button>
-    </nav>
-    <div class="user-panel">
-        <div class="service-card" style="text-align: left;">
-            <h2 style="color:var(--primary); margin-top:0;">My Bookings</h2>
-            <div id="bookingList" style="padding: 20px 0; border-top: 1px solid #eee;">
-                No active service bookings found.
-            </div>
-            <button class="btn-book" style="width:auto; padding: 12px 30px;" onclick="window.location.href='index.html'">+ New Booking</button>
+    <nav class="navbar"><div class="logo">DriveCare</div><button onclick="logout()" style="background:none; border:1px solid #ff4d4d; color:#ff4d4d; padding:5px 12px; border-radius:8px;">Logout</button></nav>
+    <div class="content-container">
+        <div class="ui-card" style="text-align:left;">
+            <h2 style="color:var(--primary);">My Bookings</h2>
+            <hr style="border:0.5px solid #eee;">
+            <div id="bookingList" style="padding:20px 0;">No active service bookings.</div>
+            <button class="btn-drive" style="width:auto; padding:12px 25px;" onclick="window.location.href='index.html'">+ New Booking</button>
         </div>
     </div>
     <script src="script.js"></script>

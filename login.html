@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | DriveCare</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar"><div class="logo">DriveCare</div></nav>
-    <div class="auth-wrapper">
-        <div class="auth-card">
-            <h2 style="color:var(--primary);">Welcome Back</h2>
-            <p style="color: #666; margin-bottom: 20px;">Login to manage your car services</p>
-            <input type="text" id="loginPhone" class="input-field" placeholder="Phone Number">
-            <input type="password" id="loginPass" class="input-field" placeholder="Password">
-            <button class="btn-book" onclick="login()">Login</button>
-            <p style="margin-top:20px;">Don't have an account? <a href="signup.html" style="color:var(--primary); font-weight:600;">Sign Up</a></p>
-        </div>
-    </div>
+    <div class="auth-wrapper"><div class="auth-box ui-card">
+        <h2 style="color:var(--primary);">Login</h2>
+        <input type="text" id="loginPhone" class="ui-input" placeholder="Phone Number">
+        <input type="password" id="loginPass" class="ui-input" placeholder="Password">
+        <button class="btn-drive" onclick="login()">Login</button>
+        <p style="margin-top:15px; font-size:14px;">New? <a href="signup.html" style="color:var(--primary); text-decoration:none; font-weight:700;">Sign Up</a></p>
+    </div></div>
     <script src="script.js"></script>
 </body>
 </html>

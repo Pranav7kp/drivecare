@@ -1,66 +1,59 @@
 /* --- DRIVECARE MASTER THEME --- */
 :root {
     --primary: #4e73df;
-    --dark-blue: #2e59d9;
-    --bg-color: #f8f9fc;
+    --bg: #f8f9fc;
     --white: #ffffff;
-    --text-main: #1a1c20;
-    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --text: #1a1c21;
 }
 
 body { 
-    font-family: 'Inter', 'Segoe UI', sans-serif; 
-    margin: 0; 
-    background-color: var(--bg-color); 
-    color: var(--text-main);
+    font-family: -apple-system, system-ui, sans-serif; 
+    margin: 0; background: var(--bg); color: var(--text);
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* --- NAV & HERO (Same as Index) --- */
-.navbar { 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 15px 6%; background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+/* NAVBAR */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 6%; background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky; top: 0; z-index: 1000;
 }
-.logo { font-weight: 800; font-size: 22px; color: var(--primary); text-decoration: none; }
+.logo { font-size: 22px; font-weight: 800; color: var(--primary); text-decoration: none; }
 
-.hero-banner { 
-    background: var(--primary); color: white; text-align: center; padding: 40px 20px; 
-}
+/* HERO (Main Page Only) */
+.hero-banner { background: var(--primary); color: white; text-align: center; padding: 35px 20px; }
+.hero-banner h1 { margin: 0; font-size: 26px; }
 
-/* --- THE "INDEX" GRID & CARDS --- */
-.services-container { max-width: 1200px; margin: auto; padding: 30px 20px; }
-.services-grid { 
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; 
-}
-.service-card { 
-    background: var(--white); padding: 25px; border-radius: 20px; 
-    text-align: center; box-shadow: var(--shadow);
-}
-.service-icon-box { 
-    background: #f0f4ff; width: 60px; height: 60px; border-radius: 50%; 
-    margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;
-}
-.service-icon-box img { width: 35px; height: 35px; object-fit: contain; }
-
-/* --- AUTH PAGES (Login/Signup) --- */
-.auth-wrapper { 
-    display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 20px;
-}
-.auth-card { 
-    background: var(--white); padding: 40px; border-radius: 20px; 
-    box-shadow: var(--shadow); width: 100%; max-width: 380px; text-align: center;
-}
-.input-field { 
-    width: 100%; padding: 14px; margin: 10px 0; border: 1.5px solid #eee; 
-    border-radius: 12px; box-sizing: border-box; font-size: 16px;
+/* GRID SYSTEM (Mobile-First 2 Columns) */
+.content-container { padding: 15px; max-width: 1200px; margin: auto; }
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 COLUMNS ON MOBILE */
+    gap: 12px;
 }
 
-/* --- BUTTONS (The Themed UI Button) --- */
-.btn-book { 
-    background: var(--primary); color: white; border: none; 
-    padding: 14px 20px; border-radius: 12px; cursor: pointer; 
-    font-weight: 700; width: 100%; font-size: 16px; transition: 0.2s;
+/* CARDS (Used for Services & Auth) */
+.ui-card {
+    background: var(--white); border-radius: 15px; padding: 20px;
+    text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
-.btn-book:active { transform: scale(0.97); background: var(--dark-blue); }
+.icon-circle {
+    background: #f0f4ff; width: 50px; height: 50px; border-radius: 50%;
+    margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;
+}
+.icon-circle img { width: 30px; height: 30px; object-fit: contain; }
 
-/* --- DASHBOARD SPECIFIC --- */
-.user-panel { max-width: 800px; margin: 40px auto; padding: 20px; }
+/* INPUTS & BUTTONS */
+.ui-input {
+    width: 100%; padding: 12px; margin: 8px 0;
+    border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px;
+}
+.btn-drive {
+    width: 100%; background: var(--primary); color: white; border: none;
+    padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s;
+}
+.btn-drive:active { transform: scale(0.96); }
+
+/* AUTH WRAPPER (Login/Signup Center) */
+.auth-wrapper { display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 20px; }
+.auth-box { width: 100%; max-width: 360px; }
