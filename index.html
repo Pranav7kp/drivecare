@@ -2,27 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DriveCare — Doorstep Vehicle Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveCare | Premium Car Services</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h2 style="font-family:'Plus Jakarta Sans';">DriveCare</h2>
-        <div class="nav">
-            <button class="btn btn-outline" onclick="location.href='login.html'">Login</button>
-            <button class="btn btn-primary" onclick="location.href='signup.html'" style="margin-left:10px">Sign Up</button>
+
+    <nav class="navbar">
+        <div class="logo">DriveCare</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="login.html" class="login-btn">Login / Sign Up</a>
         </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Professional Car Care Services</h1>
+        <p>Quality maintenance and repairs at your doorstep.</p>
     </header>
 
-    <section style="padding: 100px 8%; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px;">
-        <div>
-            <h1 style="font-family:'Plus Jakarta Sans'; font-size: 3.5rem; line-height: 1.1;">Premium Car Care <span style="color:var(--primary)">At Your Door</span></h1>
-            <p style="color:var(--text-muted); margin: 20px 0 30px;">Professional services from wash to repair, tracked in real-time.</p>
-            <button class="btn btn-primary" onclick="openBooking()">📅 Book a Service</button>
-        </div>
-        <div style="background: var(--primary-soft); height: 400px; border-radius: 30px;"></div>
-    </section>
+    <section class="services-section">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <img src="wash.png" alt="Wash" class="service-icon">
+                <h3>Premium Wash</h3>
+                <p>Exterior foam wash & tire dressing.</p>
+                <button class="book-btn" onclick="openBooking()">Book Now</button>
+            </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+            <div class="service-card">
+                <img src="interior.png" alt="Interior" class="service-icon">
+                <h3>Interior Cleaning</h3>
+                <p>Deep vacuuming & leather conditioning.</p>
+                <button class="book-btn" onclick="openBooking()">Book Now</button>
+            </div>
+
+            <div class="service-card">
+                <img src="detail.png" alt="Detail" class="service-icon">
+                <h3>Full Detailing</h3>
+                <p>Complete restoration of your vehicle.</p>
+                <button class="book-btn" onclick="openBooking()">Book Now</button>
+            </div>
+
+            <div class="service-card">
+                <img src="oil.png" alt="Oil" class="service-icon">
+                <h3>Oil Change</h3>
+                <p>Synthetic oil & filter replacement.</p>
+                <button class="book-btn" onclick="openBooking()">Book Now</button>
+            </div>
+
+            <div class="service-card">
+                <img src="battery.png" alt="Battery" class="service-icon">
+                <h3>Battery Service</h3>
+                <p>Testing and terminal cleaning.</p>
+                <button class
