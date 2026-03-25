@@ -7,34 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">DriveCare</div>
-        <div class="nav-links">
-            <a href="login.html">Login</a>
-        </div>
-    </nav>
-
+    <nav class="navbar"><div class="logo">DriveCare</div></nav>
     <div class="auth-wrapper">
         <div class="auth-card">
-            <h2 style="color:var(--primary); margin-bottom: 10px;">Create Account</h2>
-            <p style="color: #666; margin-bottom: 20px;">Join DriveCare for expert car maintenance</p>
-            
-            <div style="display: flex; gap: 10px;">
-                <input type="text" id="fname" class="input-field" placeholder="First Name">
-                <input type="text" id="lname" class="input-field" placeholder="Last Name">
-            </div>
-            
+            <h2 style="color:var(--primary);">Join DriveCare</h2>
+            <input type="text" id="fname" class="input-field" placeholder="Full Name">
             <input type="number" id="phone" class="input-field" placeholder="Phone Number">
             <input type="password" id="pass" class="input-field" placeholder="Create Password">
-            
-            <button class="btn-primary" onclick="signup()" style="margin-top: 10px;">Register Now</button>
-            
-            <p style="margin-top:20px; font-size: 14px; color: #777;">
-                Already have an account? <a href="login.html" style="color:var(--primary); font-weight:bold; text-decoration:none;">Login here</a>
-            </p>
+            <button class="btn-book" onclick="signup()">Create Account</button>
+            <p style="margin-top:20px;">Already a member? <a href="login.html" style="color:var(--primary); font-weight:600;">Login</a></p>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

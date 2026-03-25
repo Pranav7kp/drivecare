@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login — DriveCare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | DriveCare</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">DriveCare</div>
-    </nav>
-
+    <nav class="navbar"><div class="logo">DriveCare</div></nav>
     <div class="auth-wrapper">
         <div class="auth-card">
-            <h2 style="color:var(--primary);">User Login</h2>
-            <input type="text" id="loginPhone" class="input-field" placeholder="Phone Number / Admin ID">
+            <h2 style="color:var(--primary);">Welcome Back</h2>
+            <p style="color: #666; margin-bottom: 20px;">Login to manage your car services</p>
+            <input type="text" id="loginPhone" class="input-field" placeholder="Phone Number">
             <input type="password" id="loginPass" class="input-field" placeholder="Password">
-            <button class="btn-primary" onclick="login()">Login to Dashboard</button>
-            <p style="margin-top:15px;">New User? <a href="signup.html" style="color:var(--primary);">Create Account</a></p>
+            <button class="btn-book" onclick="login()">Login</button>
+            <p style="margin-top:20px;">Don't have an account? <a href="signup.html" style="color:var(--primary); font-weight:600;">Sign Up</a></p>
         </div>
     </div>
     <script src="script.js"></script>

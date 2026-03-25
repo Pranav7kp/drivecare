@@ -1,109 +1,66 @@
+/* --- DRIVECARE MASTER THEME --- */
 :root {
     --primary: #4e73df;
-    --bg-color: #f0f2f5;
-    --card-white: #ffffff;
+    --dark-blue: #2e59d9;
+    --bg-color: #f8f9fc;
+    --white: #ffffff;
     --text-main: #1a1c20;
-    --text-muted: #64748b;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    margin: 0;
+body { 
+    font-family: 'Inter', 'Segoe UI', sans-serif; 
+    margin: 0; 
+    background-color: var(--bg-color); 
     color: var(--text-main);
-    -webkit-tap-highlight-color: transparent; /* Removes blue highlight on tap */
 }
 
-/* NAVBAR - Professional & Clean */
-.navbar {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 6%;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+/* --- NAV & HERO (Same as Index) --- */
+.navbar { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px 6%; background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.logo { font-weight: 800; font-size: 22px; color: var(--primary); text-decoration: none; }
+
+.hero-banner { 
+    background: var(--primary); color: white; text-align: center; padding: 40px 20px; 
 }
 
-.logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: -1px; }
+/* --- THE "INDEX" GRID & CARDS --- */
+.services-container { max-width: 1200px; margin: auto; padding: 30px 20px; }
+.services-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; 
+}
+.service-card { 
+    background: var(--white); padding: 25px; border-radius: 20px; 
+    text-align: center; box-shadow: var(--shadow);
+}
+.service-icon-box { 
+    background: #f0f4ff; width: 60px; height: 60px; border-radius: 50%; 
+    margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;
+}
+.service-icon-box img { width: 35px; height: 35px; object-fit: contain; }
 
-.nav-login-link {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-    border: 2px solid var(--primary);
-    padding: 6px 16px;
-    border-radius: 50px;
-    transition: 0.3s;
+/* --- AUTH PAGES (Login/Signup) --- */
+.auth-wrapper { 
+    display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 20px;
+}
+.auth-card { 
+    background: var(--white); padding: 40px; border-radius: 20px; 
+    box-shadow: var(--shadow); width: 100%; max-width: 380px; text-align: center;
+}
+.input-field { 
+    width: 100%; padding: 14px; margin: 10px 0; border: 1.5px solid #eee; 
+    border-radius: 12px; box-sizing: border-box; font-size: 16px;
 }
 
-/* HERO - Mobile Comfortable */
-.hero-banner {
-    background: var(--primary);
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
+/* --- BUTTONS (The Themed UI Button) --- */
+.btn-book { 
+    background: var(--primary); color: white; border: none; 
+    padding: 14px 20px; border-radius: 12px; cursor: pointer; 
+    font-weight: 700; width: 100%; font-size: 16px; transition: 0.2s;
 }
-.hero-banner h1 { font-size: 32px; margin: 0; font-weight: 800; }
-.hero-banner p { font-size: 16px; margin-top: 10px; opacity: 0.8; }
+.btn-book:active { transform: scale(0.97); background: var(--dark-blue); }
 
-/* SERVICE GRID - High Comfort Layout */
-.main-content { padding: 20px 5%; }
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* 2 columns on small phones! */
-    gap: 15px;
-}
-
-.service-card {
-    background: var(--card-white);
-    border-radius: 20px;
-    padding: 20px 15px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.image-container {
-    background: #f8faff;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.image-container img { width: 40px; height: 40px; object-fit: contain; }
-
-.card-info h3 { font-size: 16px; margin: 0; font-weight: 700; }
-.card-info p { font-size: 12px; color: var(--text-muted); margin: 5px 0 15px; }
-
-/* THE "TAP-FRIENDLY" BUTTON */
-.btn-book-now {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 12px;
-    font-weight: 700;
-    width: 100%;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(78, 115, 223, 0.3);
-}
-
-.btn-book-now:active {
-    transform: scale(0.95);
-}
-
-/* MOBILE FIX: Make text bigger on very small screens */
-@media (max-width: 400px) {
-    .services-grid { grid-template-columns: 1fr; } /* Stack vertically if phone is tiny */
-}
+/* --- DASHBOARD SPECIFIC --- */
+.user-panel { max-width: 800px; margin: 40px auto; padding: 20px; }
