@@ -6,23 +6,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="panel-container">
-        <header class="panel-header">
-            <h1 style="color:var(--primary);">Admin Management</h1>
-            <button class="btn-logout" onclick="logout()">Logout</button>
-        </header>
+    <nav class="navbar">
+        <div class="logo">DriveCare Admin</div>
+        <button onclick="logout()" style="background:none; border:1px solid red; color:red; padding:5px 15px; border-radius:5px; cursor:pointer;">Logout</button>
+    </nav>
 
-        <div class="data-card">
-            <h3>Current Service Requests</h3>
-            <table style="width:100%; border-collapse: collapse; margin-top:15px;">
-                <thead style="background:#f1f1f1;">
+    <div class="services-container">
+        <h2>Customer Service Requests</h2>
+        <div class="service-card" style="padding:0;">
+            <table style="width:100%; border-collapse: collapse;">
+                <thead style="background:var(--primary); color:white;">
                     <tr>
-                        <th style="padding:10px; text-align:left;">Customer</th>
-                        <th style="padding:10px; text-align:left;">Service</th>
-                        <th style="padding:10px; text-align:left;">Status</th>
+                        <th style="padding:15px;">Customer</th>
+                        <th style="padding:15px;">Service</th>
+                        <th style="padding:15px;">Status</th>
                     </tr>
                 </thead>
-                <tbody id="adminBookingTable">
+                <tbody id="adminTable">
                     </tbody>
             </table>
         </div>

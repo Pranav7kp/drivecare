@@ -5,17 +5,19 @@
     <title>Login — DriveCare</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="auth-body">
-    <div class="auth-card">
-        <h2>DriveCare Login</h2>
-        <div class="input-group">
-            <input type="text" id="loginPhone" placeholder="Phone Number or Admin ID">
+<body>
+    <nav class="navbar">
+        <div class="logo">DriveCare</div>
+    </nav>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h2 style="color:var(--primary);">User Login</h2>
+            <input type="text" id="loginPhone" class="input-field" placeholder="Phone Number / Admin ID">
+            <input type="password" id="loginPass" class="input-field" placeholder="Password">
+            <button class="btn-primary" onclick="login()">Login to Dashboard</button>
+            <p style="margin-top:15px;">New User? <a href="signup.html" style="color:var(--primary);">Create Account</a></p>
         </div>
-        <div class="input-group">
-            <input type="password" id="loginPass" placeholder="Password">
-        </div>
-        <button class="btn-blue" onclick="login()">Login</button>
-        <p style="margin-top:15px;">New? <a href="signup.html" style="color:var(--primary);">Create Account</a></p>
     </div>
     <script src="script.js"></script>
 </body>

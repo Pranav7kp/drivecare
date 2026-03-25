@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Dashboard — DriveCare</title>
+    <title>Dashboard — DriveCare</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="panel-container">
-        <header class="panel-header">
-            <h1 style="color:var(--primary);">DriveCare Dashboard</h1>
-            <button class="btn-logout" onclick="logout()">Logout</button>
-        </header>
+    <nav class="navbar">
+        <div class="logo">DriveCare</div>
+        <button onclick="logout()" style="background:none; border:1px solid red; color:red; padding:5px 15px; border-radius:5px; cursor:pointer;">Logout</button>
+    </nav>
 
-        <div class="data-card">
-            <h3>Welcome back!</h3>
-            <p>Your vehicle's health and service history will appear here.</p>
-            <div id="userBookings">No bookings found.</div>
-            <button class="btn-blue" onclick="window.location.href='index.html'" style="margin-top:20px; width:auto;">Book a New Service</button>
+    <div class="services-container">
+        <h1 style="border-bottom: 2px solid var(--primary); padding-bottom:10px;">Welcome Back!</h1>
+        
+        <div class="service-card" style="text-align:left; max-width: 600px; margin-top:20px;">
+            <h3>Your Booking Status</h3>
+            <div id="bookingStatus">You have no active bookings at the moment.</div>
+            <button class="btn-primary" onclick="window.location.href='index.html'" style="margin-top:20px; width:auto;">Book New Service</button>
         </div>
     </div>
     <script src="script.js"></script>
