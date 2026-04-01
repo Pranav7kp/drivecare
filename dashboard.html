@@ -1,20 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | DriveCare</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | DriveCare</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar"><div class="logo">DriveCare</div><button onclick="logout()" style="background:none; border:1px solid #ff4d4d; color:#ff4d4d; padding:5px 12px; border-radius:8px;">Logout</button></nav>
-    <div class="content-container">
-        <div class="ui-card" style="text-align:left;">
-            <h2 style="color:var(--primary);">My Bookings</h2>
-            <hr style="border:0.5px solid #eee;">
-            <div id="bookingList" style="padding:20px 0;">No active service bookings.</div>
-            <button class="btn-drive" style="width:auto; padding:12px 25px;" onclick="window.location.href='index.html'">+ New Booking</button>
-        </div>
+
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+      </svg>
     </div>
-    <script src="script.js"></script>
+    Drive<span>Care</span>
+  </div>
+  <div class="nav-actions">
+    <span id="navUserName" style="color:rgba(255,255,255,0.8); font-size:14px; font-weight:600;"></span>
+    <button class="nav-btn-outline" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="dash-hero">
+  <div class="dash-greeting">Good day! 👋</div>
+  <div class="dash-name" id="dashName">Welcome back</div>
+  <div class="dash-stats-row">
+    <div class="dash-stat">
+      <div class="num" id="totalBookings">0</div>
+      <div class="lbl">Total Bookings</div>
+    </div>
+    <div class="dash-stat">
+      <div class="num" id="activeBookings">0</div>
+      <div class="lbl">Active</div>
+    </div>
+    <div class="dash-stat">
+      <div class="num" id="completedBookings">0</div>
+      <div class="lbl">Completed</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="section-header" style="margin-bottom:16px;">
+    <div>
+      <div class="section-title">My Bookings</div>
+      <div class="section-subtitle" id="bookingSubtitle">Loading...</div>
+    </div>
+    <a href="index.html" class="btn-add">+ New</a>
+  </div>
+
+  <div id="bookingList"></div>
+</div>
+
+<!-- TRACKING MODAL -->
+<div class="modal-overlay" id="trackModal" onclick="closeTrackModalOutside(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">🔴 Live Tracking</div>
+      <button class="modal-close" onclick="closeTrackModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="trackingModalContent"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+<script>
+  loadDashboard();
+</script>
 </body>
 </html>

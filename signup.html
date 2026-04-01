@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup | DriveCare</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | DriveCare</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar"><div class="logo">DriveCare</div></nav>
-    <div class="auth-wrapper"><div class="auth-box ui-card">
-        <h2 style="color:var(--primary);">Sign Up</h2>
-        <input type="text" id="fname" class="ui-input" placeholder="Full Name">
-        <input type="number" id="phone" class="ui-input" placeholder="Phone Number">
-        <input type="password" id="pass" class="ui-input" placeholder="Password">
-        <button class="btn-drive" onclick="signup()">Create Account</button>
-        <p style="margin-top:15px; font-size:14px;">Member? <a href="login.html" style="color:var(--primary); text-decoration:none; font-weight:700;">Login</a></p>
-    </div></div>
-    <script src="script.js"></script>
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="brand">Drive<span>Care</span></div>
+      <p>Complete Care, Anytime, Anywhere</p>
+    </div>
+    <h2>Create account</h2>
+    <p class="subtitle">Join 5000+ customers who trust DriveCare</p>
+
+    <div class="field-group">
+      <label class="field-label">Full Name</label>
+      <input type="text" id="fname" class="ui-input" placeholder="Your full name">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Phone Number</label>
+      <input type="tel" id="phone" class="ui-input" placeholder="10-digit mobile number" maxlength="10">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Password</label>
+      <div style="position:relative;">
+        <input type="password" id="pass" class="ui-input" placeholder="Min 6 characters" style="padding-right:44px;">
+        <button onclick="togglePass('pass', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:18px; color:var(--muted);">👁</button>
+      </div>
+    </div>
+
+    <div id="signupError" style="color:var(--accent); font-size:13px; margin-bottom:8px; display:none;"></div>
+
+    <button class="btn-primary" onclick="signup()">Create Account</button>
+
+    <div class="auth-footer">
+      Already a member? <a href="login.html">Sign in</a>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
 </body>
 </html>

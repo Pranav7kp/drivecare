@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | DriveCare</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | DriveCare</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar"><div class="logo">DriveCare</div></nav>
-    <div class="auth-wrapper"><div class="auth-box ui-card">
-        <h2 style="color:var(--primary);">Login</h2>
-        <input type="text" id="loginPhone" class="ui-input" placeholder="Phone Number">
-        <input type="password" id="loginPass" class="ui-input" placeholder="Password">
-        <button class="btn-drive" onclick="login()">Login</button>
-        <p style="margin-top:15px; font-size:14px;">New? <a href="signup.html" style="color:var(--primary); text-decoration:none; font-weight:700;">Sign Up</a></p>
-    </div></div>
-    <script src="script.js"></script>
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="brand">Drive<span>Care</span></div>
+      <p>Complete Care, Anytime, Anywhere</p>
+    </div>
+    <h2>Welcome back</h2>
+    <p class="subtitle">Sign in to continue booking services</p>
+
+    <div class="field-group">
+      <label class="field-label">Phone Number</label>
+      <input type="tel" id="loginPhone" class="ui-input" placeholder="10-digit mobile number" maxlength="15">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Password</label>
+      <div style="position:relative;">
+        <input type="password" id="loginPass" class="ui-input" placeholder="Enter your password" style="padding-right:44px;">
+        <button onclick="togglePass('loginPass', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:18px; color:var(--muted);">👁</button>
+      </div>
+    </div>
+
+    <div id="loginError" style="color:var(--accent); font-size:13px; margin-bottom:8px; display:none;"></div>
+
+    <button class="btn-primary" onclick="login()">Sign In</button>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="signup.html">Sign up free</a>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
 </body>
 </html>
